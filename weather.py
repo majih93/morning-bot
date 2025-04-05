@@ -22,7 +22,8 @@ def get_weather():
             }
             return weather_info
         else:
-            return None
+            raise Exception(f"Weather API Error: {data.get('message', 'Unknown error')} (Status code: {response.status_code})")
+    except requests.exceptions.RequestException as e:
+        raise Exception(f"Weather API Request Error: {e}")
     except Exception as e:
-        print(f"Weather API Error: {e}")
-        return None 
+        raise Exception(f"Weather API Error: {e}") 
